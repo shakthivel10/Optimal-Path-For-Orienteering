@@ -108,7 +108,6 @@ def main():
     startY = startControls[1]
     startXY = 1000 * startX + startY
 
-    nodes = {}
     imageCopy = image.copy()
 
     # load image as a pixel array
@@ -297,6 +296,24 @@ def main():
     else:
         print("Invalid Season")
         return
+
+    imageCopy.show()
+
+    # create a weighted graph with time take to travel between one pixel to its neighbor as the weight of each edge
+
+    startPix = pix[startX, startY]
+    colorList = list(startPix)
+    colorCode = colorList[0] * 1000000 + colorList[1] * 1000 + colorList[2]
+
+    if colorCode == colorLake or colorCode == colorImpassableVegetation or colorCode == colorOutOfBounds:
+        print("start node is itself unreachable/impassable, no path exists")
+        return
+
+    nodes = {}
+
+    startNode = node(startXY, colorCode, startX, startY)
+
+    nodes[startXY] = startNode  # will also be used as the visited set
 
 
 if __name__ == "__main__":
