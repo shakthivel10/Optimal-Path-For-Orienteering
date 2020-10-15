@@ -118,6 +118,186 @@ def main():
     imageWidth -= 1
     imageHeight -= 1
 
+    # the terrain file depicts the terrain during summer
+
+    if season.lower() == "summer":
+        pass
+
+    # during fall, foot paths adjacent to easy movement forest are covered by leaves
+
+    elif season.lower() == "fall":
+        for i in range(0, imageWidth):
+            for j in range(0, imageHeight):
+                if pix[i, j] == (0, 0, 0, 255):
+                    lowerX, lowerY, upperX, upperY = 0, 0, 0, 0
+
+                    if i == 0:
+                        lowerX = 1
+
+                    elif i == imageWidth:
+                        upperX = -1
+
+                    if j == 0:
+                        lowerY = 1
+
+                    elif j == imageHeight:
+                        upperY = -1
+
+                    for a in range(-1 + lowerX, 2 + upperX):
+                        for b in range(-1 + lowerY, 2 + upperY):
+                            if a == 0 and b == 0:
+                                continue
+
+                            neighborX = i + a
+                            neighborY = j + b
+                            if pix[neighborX, neighborY] == (255, 255, 255, 255):
+                                pix[i, j] = (255, 0, 0)
+                                break
+
+    #  In winter, the waters can freeze. we will assume that any water within
+    #  seven pixels of non-water is safe to walk on.
+
+    elif season.lower() == 'winter':
+        bluePixelSet = set()
+        for i in range(0, imageWidth):
+            for j in range(0, imageHeight):
+                currBlueXY = 1000 * i + j
+
+                if pix[i, j] == (0, 0, 255, 255) and currBlueXY not in bluePixelSet:
+
+                    currentPixelLakeEdges = set()
+                    queue = [currBlueXY]
+                    visited = set()
+                    while len(queue) > 0:
+                        currPixel = queue.pop(0)
+                        bluePixelSet.add(currPixel)
+                        lowerX, lowerY, upperX, upperY = 0, 0, 0, 0
+                        i = currPixel // 1000
+                        j = currPixel % 1000
+                        if i == 0:
+                            lowerX = 1
+
+                        elif i == imageWidth:
+                            upperX = -1
+
+                        if j == 0:
+                            lowerY = 1
+
+                        elif j == imageHeight:
+                            upperY = -1
+
+                        for a in range(-1 + lowerX, 2 + upperX):
+                            for b in range(-1 + lowerY, 2 + upperY):
+                                if a == 0 and b == 0:
+                                    continue
+
+                                neighborX = i + a
+                                neighborY = j + b
+                                neighborXY = 1000 * neighborX + neighborY
+
+                                if neighborXY not in visited:
+                                    if pix[neighborX, neighborY] == (0, 0, 255, 255):
+                                        queue.append(neighborXY)
+                                    else:
+                                        currentPixelLakeEdges.add(neighborXY)
+
+                                visited.add(neighborXY)
+
+                    for lakeEdgePixel in currentPixelLakeEdges:
+                        maxLength = 7
+                        lakeEdgePixelX = lakeEdgePixel // 1000
+                        lakeEdgePixelY = lakeEdgePixel % 1000
+                        for ai in range(-1 * maxLength, maxLength + 1):
+                            for aj in range(-1 * maxLength, maxLength + 1):
+                                if ai == 0 and aj == 0:
+                                    continue
+
+                                neighborX = lakeEdgePixelX + ai
+                                neighborY = lakeEdgePixelY + aj
+                                if 0 < neighborX <= imageWidth and 0 < neighborY <= imageHeight:
+                                    if pix[neighborX, neighborY] == (0, 0, 255, 255):
+                                        pix[neighborX, neighborY] = (
+                                            165, 242, 243)
+
+    # In spring season, any pixels within fifteen pixels of water that can be reached
+    # from a water pixel without gaining more than one meter of elevation (total) are now underwater.
+
+    elif season.lower() == 'spring':
+        reachDistance = 15
+        visited = set()
+        for i in range(0, imageWidth):
+            for j in range(0, imageHeight):
+                if pix[i, j] != (0, 0, 255, 255):
+                    lowerX, lowerY, upperX, upperY = 0, 0, 0, 0
+
+                    if i == 0:
+                        lowerX = 1
+
+                    elif i == imageWidth:
+                        upperX = -1
+
+                    if j == 0:
+                        lowerY = 1
+
+                    elif j == imageHeight:
+                        upperY = -1
+
+                    for a in range(-1 + lowerX, 2 + upperX):
+                        for b in range(-1 + lowerY, 2 + upperY):
+                            if a == 0 and b == 0:
+                                continue
+                            neighborX = i + a
+                            neighborY = j + b
+                            neighborXY = 1000 * neighborX + neighborY
+
+                            if neighborXY not in visited:
+                                if pix[neighborX, neighborY] == (0, 0, 255, 255):
+                                    visited.add(neighborXY)
+
+        for i in range(0, reachDistance):
+            nextLayer = set()
+
+            for p in visited:
+                lowerX, lowerY, upperX, upperY = 0, 0, 0, 0
+                i = p // 1000
+                j = p % 1000
+                currElevation = elevation[j][i]
+                if i == 0:
+                    lowerX = 1
+
+                elif i == imageWidth:
+                    upperX = -1
+
+                if j == 0:
+                    lowerY = 1
+
+                elif j == imageHeight:
+                    upperY = -1
+
+                for a in range(-1 + lowerX, 2 + upperX):
+                    for b in range(-1 + lowerY, 2 + upperY):
+                        if a == 0 and b == 0:
+                            continue
+                        neighborX = i + a
+                        neighborY = j + b
+                        neighborXY = 1000 * neighborX + neighborY
+
+                        if pix[neighborX, neighborY] != (0, 0, 255, 255) and pix[neighborX, neighborY] != (
+                                205, 0, 101, 255) and \
+                                (elevation[neighborY][
+                                    neighborX] - currElevation) <= 1 and neighborXY not in nextLayer and \
+                                0 <= neighborX <= imageWidth and 0 <= neighborY <= imageHeight:
+                            nextLayer.add(neighborXY)
+
+            for p in nextLayer:
+                pix[p // 1000, p % 1000] = (139, 69, 19)
+
+            visited = nextLayer
+
+    else:
+        print("Invalid Season")
+        return
+
 
 if __name__ == "__main__":
     main()
