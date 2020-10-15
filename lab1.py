@@ -66,5 +66,52 @@ def main():
     diagonalLength = math.sqrt(longitudeLengthSquared + latitudeLengthSquared)
     diagonalLengthSquared = diagonalLength * diagonalLength
 
+    image = Image.open(sys.argv[1])
+
+    elevationFile = open(sys.argv[2], 'r')
+
+    i = 0
+
+    elevation = list()
+    for line in elevationFile:
+        elevation.append(list())
+        for val in line.split():
+            elevation[i].append(float(val))
+        i += 1
+
+    elevationFile.close()
+
+    controlsFile = open(sys.argv[3], "r")
+
+    i = 0
+    controls = list()
+    for line in controlsFile:
+        controls.append(list())
+        for val in line.split():
+            controls[i].append(int(val))
+        # print(len(controls[i]),controls[i])
+        i += 1
+
+    controlsFile.close()
+
+    season = sys.argv[4]
+
+    outputFileName = sys.argv[5]
+
+    startControls = controls.pop(0)  # controls does not contain the start node any more
+    startX = startControls[0]
+    startY = startControls[1]
+
+    startXY = 1000 * startX + startY
+
+    nodes = {}
+
+    imageCopy = image.copy()
+    pix = imageCopy.load()
+
+    imageWidth, imageHeight = image.size
+    imageWidth -= 1
+    imageHeight -= 1
+
 if __name__ == "__main__":
     main()
