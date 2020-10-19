@@ -402,6 +402,82 @@ def main():
 
                 currentNode.addNeighbor(neighborXY, trueDistance, trueTime)
 
+    # A* Search Algorithm to find the path that takes the shortest time from the current
+    # control point to the next until the last control point is reached.
+
+    # since we do not know in advance, which terrains form the optimal path between the origin and destinations,
+    # we divide the displacement between the two terrains by the maximum speed among all terrains,
+    # and again divide by 2 to account for the best case elevation factor, to get a heuristic for time.
+
+    timeTaken = {}
+
+    controlsSet = set()
+
+    distanceAccumulator = 0
+    timeAccumulator = 0
+    startControlX, startControlY = startX, startY
+    startControlXY = 1000 * startControlX + startControlY
+
+    controlsSet.add(startControlXY)
+
+    while len(controls) > 0:
+
+        for e in nodes:
+            timeTaken[nodes[e].id] = 9.0e+15
+
+        timeTaken[startControlXY] = 0
+
+        endControlArr = controls.pop(0)
+        endControlX, endControlY = endControlArr[0], endControlArr[1]
+
+        pq = PriorityQueue()
+        pq.put((0, startControlXY))
+
+        known = set()
+        found = False
+
+        parent = {startControlXY: None}
+        endControlZ = elevation[endControlY][endControlX]
+
+        while not pq.empty():
+            currentNodeXY = pq.get()[1]
+
+            currentNode = nodes[currentNodeXY]
+            x1 = currentNode.x
+            y1 = currentNode.y
+
+            if x1 == endControlX and y1 == endControlY:
+                found = True
+                break
+
+            adj = currentNode.getAdjList()
+
+            for neighborNodeXY in adj.keys():
+                if neighborNodeXY not in known:
+                    known.add(neighborNodeXY)
+
+                    neighborNode = nodes[neighborNodeXY]
+                    x2 = neighborNode.x
+                    y2 = neighborNode.y
+                    z2 = elevation[y2][x2]
+
+                    h = math.sqrt(((endControlX - x2) ** 2 + (endControlY - y2) ** 2 + (endControlZ - z2) ** 2)) / (
+                        maxSpeed * 2)  # heuristic, least possible time
+
+                    potentialTime = timeTaken[currentNodeXY] + \
+                        adj[neighborNodeXY][1]
+                    if timeTaken[neighborNodeXY] > potentialTime:
+                        timeTaken[neighborNodeXY] = potentialTime
+
+                    pq.put((h + timeTaken[neighborNodeXY], neighborNodeXY))
+
+                    if neighborNodeXY not in parent.keys():
+                        parent[neighborNodeXY] = currentNodeXY
+
+        if not found:
+            print("no path found!")
+            return
+
 
 def getTrueTime(trueDistance, height, flatDistance, combinedFlatTerrainAverageSpeed):
 
