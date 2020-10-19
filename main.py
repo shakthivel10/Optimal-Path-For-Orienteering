@@ -516,17 +516,20 @@ def main():
 
 def getTrueTime(trueDistance, height, flatDistance, combinedFlatTerrainAverageSpeed):
 
-    if abs(height) > flatDistance:
-        # ((>45 degrees) too steep upwards or downwards, cannot run.)
+    # If (slope angle is >=45 degrees), we assume it is too steep and the athlete cannot run)
+    if abs(height) >= flatDistance:
         return 9.0e+12
 
     else:
-        elevationFactor = height / flatDistance
+        # will take positive values between (0, 1) for uphill & negative values between (-1, 0) for downhill slopes.
+        tanX = height / flatDistance
 
-        # Assuming, running uphill results in a decrease in speed by upto a factor of 2 and
-        # Running downhill results in a increase in speed by upto a factor of 2 (for 45 degrees)
+        # Assuming, running uphill results in a decrease in speed, and (1 - tanX)
+        # running downhill results in a increase in speed by upto a factor of (1 + tanX).
 
-        return trueDistance / (combinedFlatTerrainAverageSpeed * (1 - elevationFactor))
+        elevationAdjustedSpeed = (combinedFlatTerrainAverageSpeed * (1 - tanX))
+
+        return trueDistance / elevationAdjustedSpeed
 
 
 if __name__ == "__main__":
