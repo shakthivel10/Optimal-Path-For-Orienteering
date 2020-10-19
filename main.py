@@ -70,10 +70,10 @@ def main():
     diagonalLength = math.sqrt(longitudeLengthSquared + latitudeLengthSquared)
     diagonalLengthSquared = diagonalLength * diagonalLength
 
-    image = Image.open(sys.argv[1])
+    image = Image.open("terrain/"+sys.argv[1])
 
     # read elevation file
-    elevationFile = open(sys.argv[2], 'r')
+    elevationFile = open("terrain/"+sys.argv[2], 'r')
 
     i = 0
     elevation = list()
@@ -122,7 +122,7 @@ def main():
     if season.lower() == "summer":
         pass
 
-    # during fall, foot paths adjacent to easy movement forest are covered by leaves
+    # during fall, foot paths adjacent to easy movement forest (white pixels) are covered by leaves (red pixels)
 
     elif season.lower() == "fall":
         for i in range(0, imageWidth):
@@ -297,7 +297,7 @@ def main():
         print("Invalid Season")
         return
 
-    imageCopy.show()
+    # imageCopy.show()
 
     startPix = pix[startX, startY]
     colorList = list(startPix)
@@ -494,16 +494,16 @@ def main():
 
             currXY = parent[currXY]
 
-            pix[currXY // 1000, currXY % 1000] = (105, 50, 255)
+            pix[currXY // 1000, currXY % 1000] = (255, 79, 0)
 
         startControlX, startControlY = endControlX, endControlY
         startControlXY = 1000 * startControlX + startControlY
 
     for control in controlsSet:
-        pix[control // 1000, control % 1000] = (255, 0, 0)
+        pix[control // 1000, control % 1000] = (105, 50, 255)
 
     imageCopy.show()
-    imageCopy.save(outputFileName)
+    imageCopy.save("output/"+outputFileName)
 
     print("Total length of the path:", int(
         round(distanceAccumulator)), "meters")
