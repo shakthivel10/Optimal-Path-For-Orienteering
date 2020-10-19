@@ -299,8 +299,6 @@ def main():
 
     imageCopy.show()
 
-    # create a weighted graph with time required to travel between one pixel to its neighbor as edge weights
-
     startPix = pix[startX, startY]
     colorList = list(startPix)
     colorCode = colorList[0] * 1000000 + colorList[1] * 1000 + colorList[2]
@@ -314,6 +312,11 @@ def main():
     startNode = node(startXY, colorCode, startX, startY)
 
     nodes[startXY] = startNode  # will also be used as the visited set
+
+    # Create weighted graph representing terrain for that portion of the terrain
+    # that can be reached from the start node, with both 3D distance between the nodes
+    # and the time required to travel between the nodes (calculated based on terrain speeds,
+    # and the elevation between two nodes) as the edge weights.
 
     queue = [startNode]
 
