@@ -505,6 +505,14 @@ def main():
     imageCopy.show()
     imageCopy.save(outputFileName)
 
+    print("Total length of the path:", int(
+        round(distanceAccumulator)), "meters")
+    print("Total time required to run through this path:",
+          int(round(timeAccumulator)), "seconds")
+
+    avgSpeed = distanceAccumulator / timeAccumulator
+    print("Average speed:", round(avgSpeed, 2), "meters/second")
+
 
 def getTrueTime(trueDistance, height, flatDistance, combinedFlatTerrainAverageSpeed):
 
