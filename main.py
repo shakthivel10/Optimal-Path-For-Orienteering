@@ -478,6 +478,33 @@ def main():
             print("no path found!")
             return
 
+    # plot optimal path on image
+
+        currXY = 1000 * endControlX + endControlY
+        controlsSet.add(currXY)
+
+        timeAccumulator += timeTaken[currXY]
+
+        while True:
+
+            if not parent[currXY]:
+                break
+
+            distanceAccumulator += nodes[currXY].adjList[parent[currXY]][0]
+
+            currXY = parent[currXY]
+
+            pix[currXY // 1000, currXY % 1000] = (105, 50, 255)
+
+        startControlX, startControlY = endControlX, endControlY
+        startControlXY = 1000 * startControlX + startControlY
+
+    for control in controlsSet:
+        pix[control // 1000, control % 1000] = (255, 0, 0)
+
+    imageCopy.show()
+    imageCopy.save(outputFileName)
+
 
 def getTrueTime(trueDistance, height, flatDistance, combinedFlatTerrainAverageSpeed):
 
