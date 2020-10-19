@@ -299,7 +299,7 @@ def main():
 
     imageCopy.show()
 
-    # create a weighted graph with time take to travel between one pixel to its neighbor as the weight of each edge
+    # create a weighted graph with time required to travel between one pixel to its neighbor as edge weights
 
     startPix = pix[startX, startY]
     colorList = list(startPix)
@@ -314,6 +314,100 @@ def main():
     startNode = node(startXY, colorCode, startX, startY)
 
     nodes[startXY] = startNode  # will also be used as the visited set
+
+    queue = [startNode]
+
+    while len(queue) > 0:
+        currentNode = queue.pop(0)
+        currentX = currentNode.x
+        currentY = currentNode.y
+
+        currentNodeElevation = elevation[currentY][currentX]
+
+        currentFlatTerrainSpeed = terrainSpeed[currentNode.color]
+
+        # OffSets
+        lowerX, lowerY, upperX, upperY = 0, 0, 0, 0
+
+        if currentX == 0:
+            lowerX = 1
+
+        elif currentX == imageWidth:
+            upperX = -1
+
+        if currentY == 0:
+            lowerY = 1
+
+        elif currentY == imageHeight:
+            upperY = -1
+
+        for i in range(-1 + lowerX, 2 + upperX):
+            for j in range(-1 + lowerY, 2 + upperY):
+
+                if i == 0 and j == 0:
+                    continue
+
+                neighborX = currentX + i
+                neighborY = currentY + j
+                neighborXY = 1000 * neighborX + neighborY
+
+                if neighborXY in nodes.keys():  # already created
+                    neighborNode = nodes[neighborXY]
+                    neighborColorCode = neighborNode.color  # for average terrain speed
+
+                else:
+                    neighborColorList = list(pix[neighborX, neighborY])
+                    neighborColorCode = neighborColorList[0] * 1000000 + neighborColorList[1] * 1000 + \
+                        neighborColorList[2]
+
+                    if neighborColorCode == colorLake or neighborColorCode == colorImpassableVegetation or neighborColorCode == colorOutOfBounds:
+                        continue
+
+                    neighborNode = node(
+                        neighborXY, neighborColorCode, neighborX, neighborY)
+                    nodes[neighborXY] = neighborNode
+                    queue.append(neighborNode)
+
+                neighborNodeElevation = elevation[neighborY][neighborX]
+
+                height = neighborNodeElevation - currentNodeElevation
+
+                combinedFlatTerrainAverageSpeed = (
+                    currentFlatTerrainSpeed + terrainSpeed[neighborColorCode]) / 2
+
+                if neighborY == currentY:
+
+                    trueDistance = math.sqrt(
+                        longitudeLengthSquared + height * height)
+
+                    trueTime = getTrueTime(
+                        trueDistance, height, longitudeLength, combinedFlatTerrainAverageSpeed)
+
+                elif neighborX == currentX:
+                    trueDistance = math.sqrt(
+                        latitudeLengthSquared + height * height)
+
+                    trueTime = getTrueTime(
+                        trueDistance, height, latitudeLength, combinedFlatTerrainAverageSpeed)
+
+                else:
+                    trueDistance = math.sqrt(
+                        diagonalLengthSquared + height * height)
+
+                    trueTime = getTrueTime(
+                        trueDistance, height, diagonalLength, combinedFlatTerrainAverageSpeed)
+
+                currentNode.addNeighbor(neighborXY, trueDistance, trueTime)
+
+
+def getTrueTime(trueDistance, height, flatDistance, combinedFlatTerrainAverageSpeed):
+
+    if abs(height) >= flatDistance:
+        return 9.0e+12  # ((>=45 degrees) too steep upwards or downwards)
+
+    else:
+        elevationFactor = height / flatDistance
+        return trueDistance / (combinedFlatTerrainAverageSpeed * (1 - elevationFactor))
 
 
 if __name__ == "__main__":
