@@ -499,7 +499,7 @@ def main():
         pix[control // 1000, control % 1000] = (105, 50, 255)
 
     imageCopy.show()
-    imageCopy.save("output/"+outputFileName)
+    imageCopy.save("output/"+outputFileName+".png")
 
     print("Total length of the path:", int(
         round(distanceAccumulator)), "meters")
