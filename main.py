@@ -405,10 +405,6 @@ def main():
     # A* Search Algorithm to find the path that takes the shortest time from the current
     # control point to the next until the last control point is reached.
 
-    # since we do not know in advance, which terrains form the optimal path between the origin and destinations,
-    # we divide the displacement between the two terrains by the maximum speed among all terrains,
-    # and again divide by 2 to account for the best case elevation factor, to get a heuristic for time.
-
     timeTaken = {}
 
     controlsSet = set()
