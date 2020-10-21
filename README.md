@@ -35,26 +35,43 @@ The terrain is represented using a simpified color-only terrain map of Medon Pon
 
 The above map represents the terrain during summer and the other seasons are modeled programatically to generate terrain maps corresponding to the each season.
 
-  
+Black: Foot Path
+Brown : Paved Road
+Green: Walk Forest
+Light Orange: Rough Meadow
+Light Green: Slow Run Forest
+White: Easy Movement Forest
+Dark Orange: Open Land
+Dark Green: Impassable Vegetation
+Blue: Lake
+Pink: Out of Bounds
+
+We assume the following speeds in which an athlete can run in each of the terrains. 
+
+Rough Meadow - 1 meter/second
+Walk Forest - 2 meters/second
+Slow Run Forest - 3 meters/second
+Easy Movement Forest - 4 meters/second
+Open Land - 5 meters/second 
+Footpath - 5 meters/second 
+Paved Road - 6 meters/second
 
 ### Modeling different seasons
 
-  
-
 #### **Fall**
 
-During fall, foot paths adjacent to easy movement forest (white pixels) are covered by leaves (red pixels) making it difficult to follow footpaths. 
+During fall, foot paths adjacent to easy movement forest (white pixels) are covered by leaves (red pixels) making it difficult to follow footpaths.  We assume an athlete can run on a footpath covered by leaves at 2 meters/second.
 
 ![alt text](res/fall.png)
 #### **Winter**
 
-In winter the lakes freeze, we assume that any water within seven pixels of non-water is ice (turquoise blue) that is safe to walk on .
+In winter the lakes freeze, we assume that any water within seven pixels of non-water is ice (pale turquoise) that is safe to walk on. We assume an athlete can move on the frozen lake at 1 meter /second.
 
 ![alt text](res/winter.png)
 #### **Spring**
 
 We model early-spring/mud season when paths become muddy from melting snow and rain. Running on mud (dark brown) is slower than running on a footh path or on a open forest. 
-Any pixels within fifteen pixels of water that can be reached from a water pixel without gaining more than one meter of elevation (total) are now underwater .
+Any pixels within fifteen pixels of water that can be reached from a water pixel without gaining more than one meter of elevation (total) have now become mud. We assume an athlete can run on mud at 2 meters/second.
 
 ![alt text](res/spring.png)
   
@@ -87,9 +104,9 @@ If the absolute value of slope angle is greater than or equal to 45 degrees, we 
 
 While implementing A* search, we generate the heuristic by computing the lower bound for the time required to travel from one node to another. 
 
-Since we do not know in advance, which terrains form the optimal path between the origin and destinations, we assume the best case and divide the displacement between the two terrains by the maximum speed among all terrains, and further divide it by 2 to account for the best case elevation factor to get a lower bound for time. 
+Since we do not know in advance, which terrains form the optimal path between the start and end control points, we assume the best case to arrive at a lower bound.  The displacement between the two terrains is divided by the maximum terrain speed among all terrains, and further divide it by 2 to account for the best case elevation factor. 
 
-Since the best case is considered for speed and elevation factor, we do not over-estimate the time heuristic, thus making it admissible for A* search. 
+Since the best case is considered for distance (straight-line distance), speed and elevation factor, we do not over-estimate the time heuristic, thus making it admissible for A* search. 
 
 ## Dependencies
  - Pillow 8.0.0 or higher

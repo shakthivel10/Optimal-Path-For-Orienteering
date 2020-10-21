@@ -42,7 +42,7 @@ def main():
 
     terrainSpeed = {
         255192000: 1,  # Light Orange: Rough Meadow
-        255000000: 2,   # Red: Leaves Covering Foot Path, Fall
+        255000000: 2,   # Red: Leaves Covering Footpath, Fall
         165242243: 1,   # Pale Turquoise: Lake, Winter
         139069019: 2,   # Dark Brown: Mud, Spring
         2136040: 2,     # Green: Walk Forest
@@ -298,6 +298,7 @@ def main():
         return
 
     # imageCopy.show()
+    imageCopy.save("res/"+season+".png")
 
     startPix = pix[startX, startY]
     colorList = list(startPix)
@@ -490,13 +491,13 @@ def main():
 
             currXY = parent[currXY]
 
-            pix[currXY // 1000, currXY % 1000] = (255, 79, 0)
+            pix[currXY // 1000, currXY % 1000] = (105, 50, 255)
 
         startControlX, startControlY = endControlX, endControlY
         startControlXY = 1000 * startControlX + startControlY
 
     for control in controlsSet:
-        pix[control // 1000, control % 1000] = (105, 50, 255)
+        pix[control // 1000, control % 1000] = (192, 192, 192)
 
     imageCopy.show()
     imageCopy.save("output/"+outputFileName+".png")
