@@ -35,26 +35,26 @@ The terrain is represented using a simpified color-only terrain map of Medon Pon
 
 The above map represents the terrain during summer and the other seasons are modeled programatically to generate terrain maps corresponding to the each season.
 
-Black: Foot Path
-Brown : Paved Road
-Green: Walk Forest
-Light Orange: Rough Meadow
-Light Green: Slow Run Forest
-White: Easy Movement Forest
-Dark Orange: Open Land
-Dark Green: Impassable Vegetation
-Blue: Lake
-Pink: Out of Bounds
+Black: Foot Path             
+Brown : Paved Road               
+Green: Walk Forest                
+Light Orange: Rough Meadow                   
+Light Green: Slow Run Forest                  
+White: Easy Movement Forest		
+Dark Orange: Open Land		
+Dark Green: Impassable Vegetation		
+Blue: Lake		
+Pink: Out of Bounds		
 
 We assume the following speeds in which an athlete can run in each of the terrains. 
 
-Rough Meadow - 1 meter/second
-Walk Forest - 2 meters/second
-Slow Run Forest - 3 meters/second
-Easy Movement Forest - 4 meters/second
-Open Land - 5 meters/second 
-Footpath - 5 meters/second 
-Paved Road - 6 meters/second
+Rough Meadow - 1 meter/second			
+Walk Forest - 2 meters/second			
+Slow Run Forest - 3 meters/second			
+Easy Movement Forest - 4 meters/second			
+Open Land - 5 meters/second 			
+Footpath - 5 meters/second 			
+Paved Road - 6 meters/second			
 
 ### Modeling different seasons
 
@@ -65,7 +65,7 @@ During fall, foot paths adjacent to easy movement forest (white pixels) are cove
 ![alt text](res/fall.png)
 #### **Winter**
 
-In winter the lakes freeze, we assume that any water within seven pixels of non-water is ice (pale turquoise) that is safe to walk on. We assume an athlete can move on the frozen lake at 1 meter /second.
+In winter the lakes freeze, we assume that any water within seven pixels of non-water is ice (pale turquoise) that is safe to walk on. We assume an athlete can move on the frozen lake at 1 meter/second.
 
 ![alt text](res/winter.png)
 #### **Spring**
