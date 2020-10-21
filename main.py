@@ -70,10 +70,10 @@ def main():
     diagonalLength = math.sqrt(longitudeLengthSquared + latitudeLengthSquared)
     diagonalLengthSquared = diagonalLength * diagonalLength
 
-    image = Image.open("terrain/"+sys.argv[1])
+    image = Image.open("terrain/terrain.png")
 
     # read elevation file
-    elevationFile = open("terrain/"+sys.argv[2], 'r')
+    elevationFile = open("terrain/elevation.txt", 'r')
 
     i = 0
     elevation = list()
@@ -86,7 +86,7 @@ def main():
     elevationFile.close()
 
     # read controls file
-    controlsFile = open(sys.argv[3], "r")
+    controlsFile = open("controls.txt", "r")
 
     i = 0
     controls = list()
@@ -99,8 +99,8 @@ def main():
 
     controlsFile.close()
 
-    season = sys.argv[4]
-    outputFileName = sys.argv[5]
+    season = sys.argv[1]
+    outputFileName = sys.argv[2]
 
     # get X and Y co-ordinates of the starting point
     startControls = controls.pop(0)
