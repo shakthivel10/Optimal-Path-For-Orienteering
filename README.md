@@ -6,17 +6,17 @@
 
 # Optimal-Path-For-Orienteering
 
-A Python application to programatically model different seasons of a terrain map and to find and plot the optimal path for the sport of [**Orienteering**](en.wikipedia.org/wiki/Orienteering).
+A Python application to programatically model different seasons of a terrain map and to computer and plot the optimal path for the sport of [**Orienteering**](en.wikipedia.org/wiki/Orienteering).
 
   
 
-The implementation involves creating a weighted graph from an image representing the 2D terrain map, and an elevation file representing the elevations of each pixel in the image file, where the edge weights consist of with both 3D distance between the nodes and the time required to travel from a node to it's neighbor, and using A* search with a time heuristic on the graph to find out optimal paths between every point and its successor.
+The implementation involves creating a weighted graph from an image representing the 2D terrain map, and an elevation file representing the elevations of each pixel in the image file, where the edge weights comprise of with both 3D distance between the nodes and the time required to travel from a node to it's neighbor, and using A* search with a time heuristic on the graph to find out optimal paths between every point and its successor.
 
   
 
 ##  Orienteering
 
-Orienteering is a sport where an athlete has to navigate through a list of points (referred to as control points) in an unfamiliar terrain. It was originally developed as an exercise in land navigation for the military. Participants are given a topographical map which they use to locate and navigate through control points. --  en.wikipedia.org/wiki/Orienteering
+Orienteering is a sport where an athlete has to navigate through a list of points (referred to as control points) in an unfamiliar terrain. It was originally developed as an exercise in land navigation for the military. Participants are given a topographical map which they use to locate and navigate through control points.      -- en.wikipedia.org/wiki/Orienteering
 
   
 
