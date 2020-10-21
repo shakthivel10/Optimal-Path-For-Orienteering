@@ -39,22 +39,22 @@ Black: Foot Path
 Brown : Paved Road               
 Green: Walk Forest                
 Light Orange: Rough Meadow                   
-Light Green: Slow Run Forest                  
-White: Easy Movement Forest		
-Dark Orange: Open Land		
-Dark Green: Impassable Vegetation		
-Blue: Lake		
-Pink: Out of Bounds		
+Light Green: Slow Run Forest           
+White: Easy Movement Forest               
+Dark Orange: Open Land                 
+Dark Green: Impassable Vegetation        
+Blue: Lake               
+Pink: Out of Bounds             
 
 We assume the following speeds in which an athlete can run in each of the terrains. 
 
-Rough Meadow - 1 meter/second			
-Walk Forest - 2 meters/second			
-Slow Run Forest - 3 meters/second			
-Easy Movement Forest - 4 meters/second			
-Open Land - 5 meters/second 			
-Footpath - 5 meters/second 			
-Paved Road - 6 meters/second			
+Rough Meadow - 1 meter/second                  
+Walk Forest - 2 meters/second                  
+Slow Run Forest - 3 meters/second                  
+Easy Movement Forest - 4 meters/second                  
+Open Land - 5 meters/second                  
+Footpath - 5 meters/second                  
+Paved Road - 6 meters/second                  
 
 ### Modeling different seasons
 
