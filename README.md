@@ -33,7 +33,7 @@ The terrain is represented using a simpified color-only terrain map of Medon Pon
 
 ![alt text](terrain/terrain.png)
 
-The above map represents the terrain during summer. The other seasons are modeled programatically to generate terrain maps corresponding to the other seaons.
+The above map represents the terrain during summer and the other seasons are modeled programatically to generate terrain maps corresponding to the each season.
 
   
 
@@ -45,20 +45,18 @@ The above map represents the terrain during summer. The other seasons are modele
 
 During fall, foot paths adjacent to easy movement forest (white pixels) are covered by leaves making it difficult to follow the foot path.
 
-![alt text](http://url/to/img.png)
-
+![alt text](res/fall.png)
 - **Winter**
 
 In winter the lakes freeze, we assume that any water within seven pixels of non-water is safe to walk on.
 
-![alt text](http://url/to/img.png)
-
+![alt text](res/winter.png)
 - **Spring**
 
-We model early-spring / mud season when paths become muddy from melting snow and rain. Running on mud results in a slower speed. Any pixels within fifteen pixels of water that can be reached from a water pixel without gaining more than one meter of elevation (total) are now underwater.
+We model early-spring/mud season when paths become muddy from melting snow and rain. Running on mud is slower than running on a footh path or on a open forest. 
+Any pixels within fifteen pixels of water that can be reached from a water pixel without gaining more than one meter of elevation (total) are now underwater.
 
-![alt text](http://url/to/img.png)
-
+![alt text](res/spring.png)
   
 
 ### Creating the Graph
