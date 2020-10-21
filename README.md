@@ -133,13 +133,13 @@ python3 main.py winter winterPath
  Outputs for the control points in controls.txt.
 
 ### Summer
-![summer_path](res/summerPath.png)
+![summer_path](res/summerPath.png = 150x100)
 
 ### Fall
-![fall_path](res/fallPath.png)
+![fall_path](res/fallPath.png = 150x100)
 
 ### Winter
-![summer_path](res/winterPath.png)
+![summer_path](res/winterPath.png = 150x100)
 
 ### Spring
-![spring_path](res/springPath.png)
+![spring_path](res/springPath.png = 150x100)
