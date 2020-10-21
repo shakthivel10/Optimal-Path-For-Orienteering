@@ -16,7 +16,9 @@ The implementation involves creating a weighted graph from an image representing
 
 ##  Orienteering
 
-Orienteering is a sport where an athlete has to navigate through a list of points (referred to as control points) in an unfamiliar terrain. It was originally developed as an exercise in land navigation for the military. Participants are given a topographical map which they use to locate and navigate through control points.      -- en.wikipedia.org/wiki/Orienteering
+Orienteering is a sport where an athlete has to navigate through a list of points (referred to as control points) in an unfamiliar terrain. It was originally developed as an exercise in land navigation for the military. Participants are given a topographical map which they use to locate and navigate through control points.       
+
+-- en.wikipedia.org/wiki/Orienteering       
 
   
 
@@ -59,17 +61,17 @@ Paved Road - 6 meters/second
 
 ### Modeling different seasons
 
-#### **Fall**
+### **Fall**
 
 During fall, foot paths adjacent to easy movement forest (white pixels) are covered by leaves (red pixels) making it difficult to follow footpaths.  We assume an athlete can run on a footpath covered by leaves at 2 meters/second.
 
 ![fall_terrain](res/fall.png)
-#### **Winter**
+### **Winter**
 
 In winter the lakes freeze, we assume that any water within seven pixels of non-water is ice (pale turquoise) that is safe to walk on. We assume an athlete can move on the frozen lake at 1 meter/second.
 
 ![winter_terrain](res/winter.png)
-#### **Spring**
+### **Spring**
 
 We model early-spring/mud season when paths become muddy from melting snow and rain. Running on mud (dark brown) is slower than running on a footh path or on a open forest. 
 Any pixels within fifteen pixels of water that can be reached from a water pixel without gaining more than one meter of elevation (total) have now become mud. We assume an athlete can run on mud at 2 meters/second.
@@ -112,7 +114,7 @@ Since the best case is considered for distance (straight-line distance), speed a
 ## Dependencies
  - Pillow 8.0.0 or higher ( a Python Image Library)
 
-## Steps to run
+## Steps to run the program
 
 Enter the coordinates of control points, for which the optimal path has to be found, in the 
 file controls.txt   
