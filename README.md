@@ -110,7 +110,7 @@ Since we do not know in advance, which terrains form the optimal path between th
 Since the best case is considered for distance (straight-line distance), speed and elevation factor, we do not over-estimate the time heuristic, thus making it admissible for A* search. 
 
 ## Dependencies
- - Pillow 8.0.0 or higher
+ - Pillow 8.0.0 or higher ( a Python Image Library)
 
 ## Steps to run
 
@@ -131,7 +131,7 @@ python3 main.py winter winterPath
 ```
 
  ## Sample outputs 
- Outputs for the control points in controls.txt.
+ Optimal paths to travel through control points in controls.txt in the least amount of time
 
 ### Summer
 <img src="res/summerPath.png" alt="summer_path" width="576" height="360">            
