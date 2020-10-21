@@ -31,7 +31,7 @@ A smarter participant who can figure out the best way to get from one control po
 
 The terrain is represented using a simpified color-only terrain map of Medon Ponds Park, Honeoye Falls, NY [Original-Terrain-Map](http://www.vmeyer.net/gadget/cgi-bin/reitti.cgi?act=map&id=209)
 
-![alt text](http://url/to/img.png)
+![alt text](terrain/terrain.png)
 
 The above map represents the terrain during summer. The other seasons are modeled programatically to generate terrain maps corresponding to the other seaons.
 
@@ -91,8 +91,34 @@ If the absolute value of slope angle is greater than or equal to 45 degrees, we 
 
 While implementing A* search, we generate the heuristic by computing the lower bound for the time required to travel from one node to another. 
 
-Since we do not know in advance, which terrains form the optimal path between the origin and destinations, we assume the best case and divide the displacement between the two terrains by the maximum speed among all terrains, and further divide by 2 to account for the best case elevation factor, to get a lower bound for time.
+Since we do not know in advance, which terrains form the optimal path between the origin and destinations, we assume the best case and divide the displacement between the two terrains by the maximum speed among all terrains, and further divide it by 2 to account for the best case elevation factor to get a lower bound for time. 
 
+Since the best case is considered for speed and elevation factor, we do not over-estimate the time heuristic, thus making it admissible for A* search. 
 
+## Dependencies
+ - Pillow 8.0.0 or higher
 
- 
+## Steps to run
+
+Enter the coordinates of control points, for which the optimal path has to be found, in the 
+file controls.txt   
+
+From a python virtual environment that has the dependency installed, run
+
+ ```bash
+ python3 main.py <season> <outputFileName>
+ ```
+
+For example, to find the optimal path for the given control points during winter, 
+run
+
+```bash
+python3 main.py winter winterPath
+```
+
+ ## Sample outputs 
+ Outputs for the control points in controls.txt.
+### Summer
+### Fall
+### Winter
+### Spring
