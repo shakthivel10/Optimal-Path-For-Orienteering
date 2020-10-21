@@ -35,6 +35,7 @@ The terrain is represented using a simpified color-only terrain map of Medon Pon
 
 The above map represents the terrain during summer and the other seasons are modeled programatically to generate terrain maps corresponding to the each season.
 
+The different pixel colors represents the following terrains,
 Black: Foot Path             
 Brown : Paved Road               
 Green: Walk Forest                
@@ -46,8 +47,7 @@ Dark Green: Impassable Vegetation
 Blue: Lake               
 Pink: Out of Bounds             
 
-We assume the following speeds in which an athlete can run in each of the terrains. 
-
+We assume the following speeds in which an athlete can run in each of the terrains,
 Rough Meadow - 1 meter/second                  
 Walk Forest - 2 meters/second                  
 Slow Run Forest - 3 meters/second                  
@@ -76,7 +76,7 @@ Any pixels within fifteen pixels of water that can be reached from a water pixel
 ![alt text](res/spring.png)
   
 
-### Creating the Graph
+### Creating the graph
 
 We create the graph representing terrain only for the portion of the terrain that can be reached from the start node, with both Euclidian distance between the nodes and the time required to travel between the nodes as the edge weights.
 
