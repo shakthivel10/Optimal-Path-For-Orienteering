@@ -41,27 +41,25 @@ The above map represents the terrain during summer and the other seasons are mod
 
   
 
-- **Fall**
+#### **Fall**
 
-During fall, foot paths adjacent to easy movement forest (white pixels) are covered by leaves making it difficult to follow the foot path.
+During fall, foot paths adjacent to easy movement forest (white pixels) are covered by leaves (red pixels) making it difficult to follow footpaths. 
 
 ![alt text](res/fall.png)
-- **Winter**
+#### **Winter**
 
-In winter the lakes freeze, we assume that any water within seven pixels of non-water is safe to walk on.
+In winter the lakes freeze, we assume that any water within seven pixels of non-water is ice (turquoise blue) that is safe to walk on .
 
 ![alt text](res/winter.png)
-- **Spring**
+#### **Spring**
 
-We model early-spring/mud season when paths become muddy from melting snow and rain. Running on mud is slower than running on a footh path or on a open forest. 
-Any pixels within fifteen pixels of water that can be reached from a water pixel without gaining more than one meter of elevation (total) are now underwater.
+We model early-spring/mud season when paths become muddy from melting snow and rain. Running on mud (dark brown) is slower than running on a footh path or on a open forest. 
+Any pixels within fifteen pixels of water that can be reached from a water pixel without gaining more than one meter of elevation (total) are now underwater .
 
 ![alt text](res/spring.png)
   
 
 ### Creating the Graph
-
-  
 
 We create the graph representing terrain only for the portion of the terrain that can be reached from the start node, with both Euclidian distance between the nodes and the time required to travel between the nodes as the edge weights.
 
