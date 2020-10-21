@@ -31,11 +31,11 @@ A smarter participant who can figure out the best way to get from one control po
 
 The terrain is represented using a simpified color-only terrain map of Medon Ponds Park, Honeoye Falls, NY [Original-Terrain-Map](http://www.vmeyer.net/gadget/cgi-bin/reitti.cgi?act=map&id=209)
 
-![alt text](terrain/terrain.png)
+![terrain](terrain/terrain.png)
 
 The above map represents the terrain during summer and the other seasons are modeled programatically to generate terrain maps corresponding to the each season.
 
-The different pixel colors represents the following terrains,
+The different pixel colors represents the following terrains,           
 Black: Foot Path             
 Brown : Paved Road               
 Green: Walk Forest                
@@ -47,7 +47,7 @@ Dark Green: Impassable Vegetation
 Blue: Lake               
 Pink: Out of Bounds             
 
-We assume the following speeds in which an athlete can run in each of the terrains,
+We assume the following speeds in which an athlete can run in each of the terrains,        
 Rough Meadow - 1 meter/second                  
 Walk Forest - 2 meters/second                  
 Slow Run Forest - 3 meters/second                  
@@ -62,18 +62,18 @@ Paved Road - 6 meters/second
 
 During fall, foot paths adjacent to easy movement forest (white pixels) are covered by leaves (red pixels) making it difficult to follow footpaths.  We assume an athlete can run on a footpath covered by leaves at 2 meters/second.
 
-![alt text](res/fall.png)
+![fall_terrain](res/fall.png)
 #### **Winter**
 
 In winter the lakes freeze, we assume that any water within seven pixels of non-water is ice (pale turquoise) that is safe to walk on. We assume an athlete can move on the frozen lake at 1 meter/second.
 
-![alt text](res/winter.png)
+![winter_terrain](res/winter.png)
 #### **Spring**
 
 We model early-spring/mud season when paths become muddy from melting snow and rain. Running on mud (dark brown) is slower than running on a footh path or on a open forest. 
 Any pixels within fifteen pixels of water that can be reached from a water pixel without gaining more than one meter of elevation (total) have now become mud. We assume an athlete can run on mud at 2 meters/second.
 
-![alt text](res/spring.png)
+![spring_terrain](res/spring.png)
   
 
 ### Creating the graph
@@ -100,7 +100,7 @@ t = d / (s * (1 - m)),  if  -1< m < 1 ( or -45 < slope_angle < 45 )
 
 If the absolute value of slope angle is greater than or equal to 45 degrees, we make an assumption that the athlete cannot traverse the slope safely as it is too steep.
  
-### Using A* search to find the Optimal Path 
+### Using A* search to find the optimal path 
 
 While implementing A* search, we generate the heuristic by computing the lower bound for the time required to travel from one node to another. 
 
@@ -131,7 +131,15 @@ python3 main.py winter winterPath
 
  ## Sample outputs 
  Outputs for the control points in controls.txt.
+
 ### Summer
+![summer_path](res/summerPath.png)
+
 ### Fall
+![fall_path](res/fallPath.png)
+
 ### Winter
+![summer_path](res/winterPath.png)
+
 ### Spring
+![spring_path](res/springPath.png)
