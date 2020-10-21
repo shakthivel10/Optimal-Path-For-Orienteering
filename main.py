@@ -41,7 +41,6 @@ def main():
     # terrain speeds (meters/second), color codes (r*1000000+g*1000+b )
 
     terrainSpeed = {
-        255192000: 1,  # Light Orange: Rough Meadow
         255000000: 2,   # Red: Leaves Covering Footpath, Fall
         165242243: 1,   # Pale Turquoise: Lake, Winter
         139069019: 2,   # Dark Brown: Mud, Spring
@@ -50,7 +49,9 @@ def main():
         255255255: 4,   # White : Easy Movement Forest
         248148018: 5,   # Dark Orange :Open Land
         0: 5,           # Black: Foot Path
-        71051003: 6     # Brown : Paved Road
+        71051003: 6,    # Brown : Paved Road
+        255192000: 1    # Light Orange: Rough Meadow
+
     }
 
     maxSpeed = max(terrainSpeed.values())
@@ -298,7 +299,7 @@ def main():
         return
 
     # imageCopy.show()
-    imageCopy.save("res/"+season+".png")
+    # imageCopy.save("res/"+season+".png")
 
     startPix = pix[startX, startY]
     colorList = list(startPix)
@@ -502,13 +503,13 @@ def main():
     imageCopy.show()
     imageCopy.save("output/"+outputFileName+".png")
 
-    print("Total length of the path:", int(
+    print("Total length of the path: ", int(
         round(distanceAccumulator)), "meters")
-    print("Total time required to run through this path:",
+    print("Total time required to run through this path: ",
           int(round(timeAccumulator)), "seconds")
 
     avgSpeed = distanceAccumulator / timeAccumulator
-    print("Average speed:", round(avgSpeed, 2), "meters/second")
+    print("Average speed: ", round(avgSpeed, 2), "meters/second")
 
 
 def getTrueTime(trueDistance, height, flatDistance, combinedFlatTerrainAverageSpeed):
