@@ -492,13 +492,13 @@ def main():
 
             currXY = parent[currXY]
 
-            pix[currXY // 1000, currXY % 1000] = (105, 50, 255)
+            pix[currXY // 1000, currXY % 1000] = (180, 0, 180)
 
         startControlX, startControlY = endControlX, endControlY
         startControlXY = 1000 * startControlX + startControlY
 
     for control in controlsSet:
-        pix[control // 1000, control % 1000] = (192, 192, 192)
+        pix[control // 1000, control % 1000] = (127, 255, 0)
 
     imageCopy.show()
     imageCopy.save("output/"+outputFileName+".png")
