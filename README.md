@@ -6,7 +6,7 @@
 
 # Optimal-Path-For-Orienteering
 
-A Python application to programatically model different seasons of a terrain map and to compute and plot the optimal path for the sport of [**Orienteering**](en.wikipedia.org/wiki/Orienteering).
+A Python program to programatically model different seasons of a terrain and to compute and plot the optimal path for the sport of [**Orienteering**](en.wikipedia.org/wiki/Orienteering).
 
   
 
@@ -36,7 +36,7 @@ The terrain is represented using a simpified color-only terrain map of Medon Pon
 
 ![terrain](terrain/terrain.png)
 
-The above map represents the terrain during summer and the other seasons are modeled programatically to generate terrain maps corresponding to the each season.
+The above map represents the terrain during summer and the other seasons are modeled programatically to generate terrains corresponding to the each season. The elevation of every pixel in the terrain is given in the file terrain/elevations.txt.  
 
 The different pixel colors represents the following terrains,           
 Black: Foot Path             
