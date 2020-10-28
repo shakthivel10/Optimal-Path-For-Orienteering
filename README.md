@@ -6,7 +6,7 @@
 
 # Optimal-Path-For-Orienteering
 
-A Python program to compute and plot the Optimal Path for the sport of [**Orienteering**](en.wikipedia.org/wiki/Orienteering) in a 3D landscape in different seasons.
+A Python program to model different seasons on a landscape, and to compute and plot the Optimal Path for the sport of [**Orienteering**](en.wikipedia.org/wiki/Orienteering) in 3D space. 
 
   
 
