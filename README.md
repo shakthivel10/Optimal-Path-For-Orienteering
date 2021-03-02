@@ -32,7 +32,7 @@ A smarter participant who can figure out the best way to get from one control po
 
 ### Terrain
 
-The terrain is represented using a simpified color-only terrain map of Medon Ponds Park, Honeoye Falls, NY [Original-Terrain-Map](http://www.vmeyer.net/gadget/cgi-bin/reitti.cgi?act=map&id=209)
+The terrain is represented using a simpified color-only terrain map of Mendon Ponds Park, Honeoye Falls, NY [Original-Terrain-Map](http://www.vmeyer.net/gadget/cgi-bin/reitti.cgi?act=map&id=209)
 
 ![terrain](terrain/terrain.png)
 
